@@ -205,10 +205,12 @@ def maybe_download_and_extract():
 
 def main(_):
   maybe_download_and_extract()
-  image = (FLAGS.image_file if FLAGS.image_file else
-           os.path.join(FLAGS.model_dir, 'cropped_panda.jpg'))
-  run_inference_on_image(image)
-
+  
+  if FLAGS.image_file:
+    image = FLAGS.image_file
+    run_inference_on_image(image)
+  else:
+    print('No image_file provided!')
 
 if __name__ == '__main__':
   tf.app.run()
